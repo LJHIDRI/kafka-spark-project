@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         // IMPORTANT: Remplacez 'votre-nom-dockerhub' par votre vrai nom d'utilisateur Docker Hub
-        DOCKER_IMAGE_NAME = "votre-nom-dockerhub/kafka-spark-processor-json"
+        DOCKER_IMAGE_NAME = "lou19/kafka-spark-processor-json"
     }
 
     stages {
