@@ -129,18 +129,14 @@ services:
 
   # --- SERVICE JENKINS ---
   jenkins:
-    image: jenkins/jenkins:lts-jdk11
+    build: ./jenkins  # <-- On dit à Docker de construire l'image depuis le dossier 'jenkins'
+       # ... le reste ne change pas ...
     container_name: jenkins
     ports:
       - "8080:8080"
       - "50000:50000"
     volumes:
-      # Accès au moteur Docker de la machine hôte
       - /var/run/docker.sock:/var/run/docker.sock
-      # Volume pour sauvegarder les données de Jenkins
       - jenkins_home:/var/jenkins_home
     environment:
       - JAVA_OPTS=-Djenkins.install.runSetupWizard=false
-
-volumes:
-  jenkins_home:
