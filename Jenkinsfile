@@ -1,13 +1,5 @@
 pipeline {
-    agent {
-        // --- LA CORRECTION EST ICI ---
-        // On dit à Jenkins d'exécuter les étapes dans un conteneur
-        // qui utilise le même agent, mais en forçant l'utilisateur à 'root'
-        docker {
-            image 'jenkins/jenkins:lts-jdk11' // On peut se baser sur l'image de base ici
-            args '-u root'
-        }
-    }
+    agent any
 
     environment {
         DOCKER_IMAGE_NAME = "lou19/kafka-spark-processor-json"
@@ -24,7 +16,6 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 echo "Étape 2: Construction de l'image Docker de l'application Spark..."
-                // La commande est maintenant exécutée en tant que root, qui a les permissions
                 sh "docker build -t ${DOCKER_IMAGE_NAME}:${BUILD_NUMBER} ./spark-app"
             }
         }
