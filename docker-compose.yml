@@ -132,12 +132,13 @@ services:
     build: ./jenkins  # <-- On dit à Docker de construire l'image depuis le dossier 'jenkins'
        # ... le reste ne change pas ...
     container_name: jenkins
+    user: root
     ports:
       - "8080:8080"
       - "50000:50000"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-      - jenkins_home:/var/jenkins_home
+      - jenkins_home:/var/jenkins_home   
     environment:
       - JAVA_OPTS=-Djenkins.install.runSetupWizard=false
 
