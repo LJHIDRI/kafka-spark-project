@@ -102,7 +102,7 @@ services:
     image: bitnami/spark:3.3.0
     container_name: spark-master
     ports:
-      - "8081:8080"  # Port changé à 8081 pour éviter le conflit avec Jenkins
+      - "8081:8080"  
       - "7077:7077"
     environment:
       - SPARK_MODE=master
@@ -117,20 +117,14 @@ services:
       - SPARK_MASTER_URL=spark://spark-master:7077
 
   spark-app:
-    # ATTENTION: Nous supprimons la section 'build' ici.
-    # Jenkins va construire cette image, et nous la lancerons manuellement ou avec un autre docker-compose plus tard.
-    # Pour l'instant, on la met en commentaire pour ne pas créer de conflit.
-    # build: ./spark-app
-    # container_name: spark-app
-    # ...
-    image: alpine # On met une image bidon pour que le fichier soit valide
+    
+    image: alpine 
     command: ["echo", "Le service spark-app sera lancé par Jenkins ou manuellement"]
 
 
-  # --- SERVICE JENKINS ---
+  
   jenkins:
-    build: ./jenkins  # <-- On dit à Docker de construire l'image depuis le dossier 'jenkins'
-       # ... le reste ne change pas ...
+    build: ./jenkins 
     container_name: jenkins
     user: root
     ports:
